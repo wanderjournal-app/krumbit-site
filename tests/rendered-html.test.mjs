@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 async function render(path = "/") {
@@ -30,4 +31,16 @@ test("server-renders privacy and support pages", async () => {
     assert.match(html, /Krumbit/);
     assert.match(html, /krumbit\.co@gmail\.com/);
   }
+});
+
+test("exports the complete GitHub Pages site", async () => {
+  for (const file of ["index.html", "privacy/index.html", "support/index.html"]) {
+    const html = await readFile(new URL(`../dist/static/${file}`, import.meta.url), "utf8");
+    assert.match(html, /Krumbit/);
+  }
+
+  const cname = await readFile(new URL("../dist/static/CNAME", import.meta.url), "utf8");
+  assert.equal(cname, "krumbit-app.easynet.world\n");
+  await readFile(new URL("../dist/static/.nojekyll", import.meta.url));
+  await readFile(new URL("../dist/static/og.png", import.meta.url));
 });

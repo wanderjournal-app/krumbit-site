@@ -12,7 +12,18 @@ Requires Node.js 22.13 or newer.
 npm install
 npm run dev
 npm run build
+npm run export
 npm test
 ```
 
 The site includes the main product page plus `/privacy` and `/support` routes.
+
+## Publishing
+
+This repository is the single source of truth for the Krumbit website. The
+default branch is `master`. Every push to `master` runs the GitHub Pages
+workflow, builds the site, exports the three routes as static pages, and deploys
+the result automatically.
+
+Do not maintain a second website copy or publish through Sites. The production
+custom domain is `krumbit-app.easynet.world`.
