@@ -12,10 +12,13 @@ test("server-renders the Krumbit product page", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   const html = await response.text();
-  assert.match(html, /Krumbit — Learn While You Scroll/);
-  assert.match(html, /Keep the scroll/);
-  assert.match(html, /Bite-sized lessons/i);
+  assert.match(html, /Krumbit — Your Next Scroll Can Make You Smarter/);
+  assert.match(html, /Your next scroll/);
+  assert.match(html, /Download free/i);
+  assert.match(html, /4\.7 from early ratings/i);
+  assert.match(html, /One small loop/i);
   assert.match(html, /apps\.apple\.com\/us\/app\/krumbit/);
+  assert.match(html, /og\.png/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
 });
 
